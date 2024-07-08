@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Post Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/postdetail.css">
+</head>
+<body>
+<nav th:replace="layouts/nav::nav(loginUser=${loginUser})"></nav>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h1 class="field" th:text="${post.title}"></h1>
+        <div class="field">
+            <span th:text="${post.blog.name}"></span>
+            |
+            <span th:text="${#temporals.format(post.registrationDate, 'YYYY/MM/dd HH:mm')}"></span>
+        </div>
+
+        <div class="field" th:text="${post.content}"></div>
+    </div>
+</section>
+<footer th:replace="layouts/footer::footer"></footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

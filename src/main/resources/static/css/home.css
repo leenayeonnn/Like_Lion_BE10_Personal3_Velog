@@ -1,0 +1,13 @@
+ul {
+    list-style: none;
+    text-align: center; /* ul을 가로 중앙 정렬 */
+    padding: 0;
+}
+li {
+    display: inline;
+    margin-right: 5px;
+}
+li a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
