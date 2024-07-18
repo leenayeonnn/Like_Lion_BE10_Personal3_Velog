@@ -13,7 +13,7 @@ import org.velog.personal_project3.domain.Series;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-	Page<Post> findByIsPublicAndIsPublished(Pageable pageable, boolean isPublic, boolean isPublished);
+	List<Post> findByIsPublicAndIsPublished(Pageable pageable, boolean isPublic, boolean isPublished);
 
 	List<Post> findByBlogIdAndIsPublishedOrderByRegistrationDateDesc(Long blogId, boolean isPublished);
 

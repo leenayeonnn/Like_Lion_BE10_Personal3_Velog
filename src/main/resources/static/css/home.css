@@ -3,10 +3,12 @@
     text-align: center; /* ul을 가로 중앙 정렬 */
     padding: 0;
 }
+
 #page-number li {
     display: inline;
     margin-right: 5px;
 }
+
 li a.active {
     font-weight: bold;
     text-decoration: underline;
@@ -16,4 +18,19 @@ li a.active {
     aspect-ratio: 4.5 / 3;
     object-fit: cover;
     object-position: center;
+}
+
+.btn-group {
+    margin-bottom: 50px;
+}
+
+#no-posts,
+#load-more-post-btn {
+    width: 100%; /* 포스트 요소가 부모 컨테이너의 전체 너비를 차지하도록 설정 */
+    margin-top: 20px; /* 포스트 요소 사이에 여백을 추가 */
+    padding: 10px;
+}
+
+.center{
+    text-align: center;
 }

@@ -33,12 +33,15 @@
                 series |
                 <button id="series-btn" class="btn btn-outline-dark" th:text="${post.series.name}"></button>
             </div>
-            <div class="field right" id="edit" th:if="${isWriter}">
-                <input type="button" class="editBtn" value="수정">
-                <input type="button" class="deleteBtn" value="삭제">
+            <div class="field right" id="view">
+                <span id="view-count" th:text="'조회수 ' + ${post.view}"></span>
             </div>
             <div class="field right" id="registration-date">
                 <span th:text="${#temporals.format(post.registrationDate, 'YYYY/MM/dd HH:mm')}"></span>
+            </div>
+            <div class="field right" id="edit" th:if="${isWriter}">
+                <input type="button" class="editBtn" value="수정">
+                <input type="button" class="deleteBtn" value="삭제">
             </div>
         </div>
         <div id="main">

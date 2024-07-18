@@ -57,6 +57,7 @@ $('.editBtn').click(function () {
 //==================
 
 $(document).ready(function () {
+    addViewCount();
     loadComment();
 });
 
@@ -106,7 +107,7 @@ function loadComment(page) {
             setupPagination(response.currentPage, response.totalPages);
         },
         error: function (error) {
-            commentElement.append('<div id="no-comments">댓글이 없습니다</div>')
+            commentElement.append('<div id="no-comments" class="center">댓글이 없습니다</div>')
         }
     });
 }
@@ -332,8 +333,33 @@ $(document).on('click', '.show-sub-comment-btn', function () {
             })
         },
         error: function (error) {
-            subCommentElement.append('<div id="no-sub-comments">대댓글이 없습니다</div>')
+            subCommentElement.append('<div id="no-sub-comments" class="center">대댓글이 없습니다</div>')
         }
     });
     showSub = !showSub;
 });
+
+// =====
+function addViewCount() {
+    if ($('#edit').length !== 0) {
+        console.log("writer");
+        return;
+    }
+
+    const postId = $('#post-id').val();
+
+    $.ajax({
+        url: "/api/posts/view",
+        type: 'PUT',
+        data: {
+            'postId': postId
+        },
+        success: function (response) {
+            const currentViewCount = parseInt($('#view-count').text().replace('조회수 ', ''), 10);
+            const newViewCount = currentViewCount + 1;
+            $('#view-count').text('조회수 ' + newViewCount);
+        },
+        error: function (error) {
+        }
+    });
+}

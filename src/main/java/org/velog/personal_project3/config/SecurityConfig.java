@@ -38,10 +38,10 @@ public class SecurityConfig {
 		http
 			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers("/css/**", "/js/**").permitAll()
-				.requestMatchers("/", "/welcome").permitAll()
+				.requestMatchers("/", "/welcome", "/api/posts").permitAll()
 				.requestMatchers("/userreg", "/api/users/check-username", "/api/users/check-email").permitAll()
 				.requestMatchers("/login").permitAll()
-				.requestMatchers("/@{username}/**", "/api/posts/{username}", "/api/blogs", "/api/series/{username}").permitAll()
+				.requestMatchers("/@{username}/**", "/api/posts/{username}", "/api/blogs", "/api/series/{username}", "/api/posts/view").permitAll()
 				.requestMatchers(HttpMethod.GET,"/api/comments").permitAll()
 				.requestMatchers("/api/posts/{username}/series/{seriesId}").permitAll()
 				.requestMatchers("/posts/images/**", "/posts/main-images/**", "/users/profile-images/**").permitAll()

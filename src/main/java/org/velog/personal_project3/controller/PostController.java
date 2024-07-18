@@ -113,7 +113,6 @@ public class PostController {
 			return "pages/posts/publishpost";
 		}
 
-		System.out.println(writePostDto.getSeries());
 		postService.save(writePostDto, userDetails);
 
 		return "redirect:/";

@@ -88,3 +88,7 @@
     height: 100%;
     object-fit: cover; /* 이미지가 잘릴 수 있지만, div에 맞춰 조정 */
 }
+
+.center{
+    text-align: center;
+}

@@ -45,6 +45,9 @@ public class Post {
 	@Column(name = "main_img_url")
 	private String mainImgUrl;
 
+	@Column(name = "view")
+	private Long view;
+
 	@ManyToOne
 	@JoinColumn(name = "blog_id", nullable = false)
 	private Blog blog;

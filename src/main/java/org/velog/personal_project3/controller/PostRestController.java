@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.catalina.User;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -189,5 +192,35 @@ public class PostRestController {
 		Map<String, Object> response = new HashMap<>();
 		response.put("posts", posts);
 		return ResponseEntity.ok(response);
+	}
+
+	@GetMapping
+	public ResponseEntity<?> getHomePosts(
+		@RequestParam(name = "orderMethod", defaultValue = "recent") String orderMethod,
+		@RequestParam(name = "page", defaultValue = "1") int page,
+		@RequestParam(name = "size", defaultValue = "12") int size) {
+
+		Pageable pageable;
+		if (orderMethod.equals("recent")) {
+			pageable = PageRequest.of(page - 1, size, Sort.by("registrationDate").descending());
+		} else {
+			pageable = PageRequest.of(page - 1, size, Sort.by("view").descending());
+		}
+
+		List<Post> posts = postService.findByIsPublicAndIsPublished(pageable, true, true);
+
+		if (posts.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post not found");
+		}
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("posts", posts);
+		return ResponseEntity.ok(response);
+	}
+
+	@PutMapping("/view")
+	public ResponseEntity<?> addViewCount(@RequestParam("postId") Long postId) {
+		postService.addView(postId);
+		return ResponseEntity.ok().build();
 	}
 }

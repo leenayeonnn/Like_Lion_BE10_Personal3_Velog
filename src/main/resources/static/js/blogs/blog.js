@@ -145,7 +145,7 @@ function loadPosts() {
             postElement.append('<button id="load-more-post-btn" class="btn btn-dark">더 불러오기</button>')
         },
         error: function (error) {
-            postElement.append('<div id="no-posts">게시물이 없습니다</div>');
+            postElement.append('<div id="no-posts" class="center">게시물이 없습니다</div>');
         }
     });
 }
@@ -182,7 +182,7 @@ function loadSeries() {
             seriesElement.append('<button id="load-more-series-btn" class="btn btn-dark">더 불러오기</button>')
         },
         error: function (error) {
-            seriesElement.append('<div id="no-series">시리즈가 없습니다</div>');
+            seriesElement.append('<div id="no-series" class="center">시리즈가 없습니다</div>');
         }
     });
 }

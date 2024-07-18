@@ -34,6 +34,15 @@ public class PostService {
 
 		Post post = postId != null ? postRepository.findById(postId).get() : new Post();
 
+		if (post.getRegistrationDate() == null) {
+			post.setRegistrationDate(LocalDateTime.now());
+			post.setBlog(blogRepository.findById(writePostDto.getBlogId()).get());
+			post.setView(0L);
+		} else if (post.getIsPublished() == !(writePostDto.getIsPublished())) {
+			post.setRegistrationDate(LocalDateTime.now());
+			post.setView(0L);
+		}
+
 		post.setTitle(writePostDto.getTitle());
 		post.setContent(writePostDto.getContent());
 		post.setIsPublic(writePostDto.getIsPublic());
@@ -61,15 +70,10 @@ public class PostService {
 
 		post.setSeries(seriesRepository.findByBlogIdAndName(writePostDto.getBlogId(), writePostDto.getSeries()));
 
-		if (post.getRegistrationDate() == null) {
-			post.setRegistrationDate(LocalDateTime.now());
-			post.setBlog(blogRepository.findById(writePostDto.getBlogId()).get());
-		}
-
 		postRepository.save(post);
 	}
 
-	public Page<Post> findByIsPublicAndIsPublished(Pageable pageable, boolean isPublic, boolean isPublished) {
+	public List<Post> findByIsPublicAndIsPublished(Pageable pageable, boolean isPublic, boolean isPublished) {
 		return postRepository.findByIsPublicAndIsPublished(pageable, isPublic, isPublished);
 	}
 
@@ -95,5 +99,13 @@ public class PostService {
 	public List<Post> findBySeries(Series series, boolean isOwner, Pageable pageable) {
 		return isOwner ? postRepository.findBySeriesAndIsPublished(series, true, pageable) :
 			postRepository.findBySeriesAndIsPublishedAndIsPublic(series, true, true, pageable);
+	}
+
+	public void addView(Long id) {
+		Post post = postRepository.findById(id).orElse(null);
+		if (post != null) {
+			post.setView(post.getView() + 1);
+			postRepository.save(post);
+		}
 	}
 }
