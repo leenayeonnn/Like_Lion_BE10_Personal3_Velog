@@ -35,9 +35,9 @@ public class HomeController {
 			model.addAttribute("loginUser", userDetails.getUsername());
 		}
 
-		Pageable pageable = PageRequest.of(page - 1, size, Sort.by("id").ascending());
+		Pageable pageable = PageRequest.of(page - 1, size, Sort.by("registrationDate").descending());
 
-		Page<Post> posts = postService.findAllPosts(pageable);
+		Page<Post> posts = postService.findByIsPublicAndIsPublished(pageable, true, true);
 
 		// HTML 태그 제거
 		List<Post> removeTagPosts = posts.stream().map(post -> {

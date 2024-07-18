@@ -1,6 +1,5 @@
 package org.velog.personal_project3.domain;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,8 +39,8 @@ public class User {
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@Column(name = "profile_url", nullable = false)
-	private String profileUrl = "/image/profile/common/common-profile.png";
+	@Column(name = "profile_url")
+	private String profileUrl;
 
 	@Column(name = "registration_date", nullable = false)
 	private LocalDateTime registrationDate;

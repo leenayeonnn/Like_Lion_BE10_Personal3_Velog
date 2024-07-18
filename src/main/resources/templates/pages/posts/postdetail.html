@@ -8,25 +8,66 @@
     <title>Post Detail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/postdetail.css">
+    <link rel="stylesheet" href="/css/posts/postdetail.css">
 </head>
 <body>
 <nav th:replace="layouts/nav::nav(loginUser=${loginUser})"></nav>
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <h1 class="field" th:text="${post.title}"></h1>
-        <div class="field">
-            <span th:text="${post.blog.name}"></span>
-            |
-            <span th:text="${#temporals.format(post.registrationDate, 'YYYY/MM/dd HH:mm')}"></span>
+        <input type="hidden" id="post-id" th:value="${post.id}">
+        <div id="info">
+            <h1 class="field" th:text="${post.title}"></h1>
+            <div class="field">
+                writer |
+                <button id="writer-btn" class="btn btn-outline-dark" th:text="${post.blog.name}"></button>
+            </div>
+            <div class="field" th:if="${post.tags.size() != 0}">
+                <div id="tags">
+                    tag |
+                    <button th:each="tag : ${post.tags}" class="btn btn-outline-dark" th:text="${tag.name}"></button>
+                </div>
+            </div>
+            <div class="field" th:if="${post.series} != null">
+                <input type="hidden" id="series-id" th:value="${post.series.id}">
+                series |
+                <button id="series-btn" class="btn btn-outline-dark" th:text="${post.series.name}"></button>
+            </div>
+            <div class="field right" id="edit" th:if="${isWriter}">
+                <input type="button" class="editBtn" value="수정">
+                <input type="button" class="deleteBtn" value="삭제">
+            </div>
+            <div class="field right" id="registration-date">
+                <span th:text="${#temporals.format(post.registrationDate, 'YYYY/MM/dd HH:mm')}"></span>
+            </div>
         </div>
+        <div id="main">
+            <div class="image-container">
+                <img th:if="${!post.mainImgUrl.isEmpty()}" id="main-image" th:src="${post.mainImgUrl}" alt="..."/>
+            </div>
+            <div class="field" th:utext="${post.content}"></div>
+        </div>
+        <div id="comments">
+            <h5 class="field">댓글</h5>
+            <div class="field">
+                <div class="form-group">
+                    <textarea id="comment-input" class="form-control" maxlength="200" placeholder="최대 200자"></textarea>
+                </div>
+                <div class="right">
+                    <button id="comment-summit-btn" class="btn btn-outline-dark">등록하기</button>
+                </div>
+            </div>
+            <div id="comment-list">
 
-        <div class="field" th:text="${post.content}"></div>
+            </div>
+        </div>
     </div>
 </section>
 <footer th:replace="layouts/footer::footer"></footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="/js/posts/postdetail.js"></script>
 </body>
 </html>

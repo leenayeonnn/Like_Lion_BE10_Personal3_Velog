@@ -37,7 +37,7 @@ public class UserController {
 
 	@GetMapping("/userreg")
 	public String userregform(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-		if(userDetails != null){
+		if (userDetails != null) {
 			model.addAttribute("loginUser", userDetails.getUsername());
 		}
 
@@ -56,7 +56,7 @@ public class UserController {
 
 	@GetMapping("/login")
 	public String loginform(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-		if(userDetails != null){
+		if (userDetails != null) {
 			model.addAttribute("loginUser", userDetails.getUsername());
 		}
 
@@ -106,7 +106,7 @@ public class UserController {
 
 	@GetMapping("/logout")
 	public String logout(HttpServletResponse response, @AuthenticationPrincipal UserDetails userDetails) {
-		if(userDetails != null){
+		if (userDetails != null) {
 			refreshTokenService.deleteRefreshToken(userDetails.getUsername());
 		}
 
@@ -116,11 +116,22 @@ public class UserController {
 
 		Cookie refreshTokenCookie = new Cookie("refreshToken", null);
 		refreshTokenCookie.setPath("/");
-		refreshTokenCookie.setMaxAge(0); //7일
+		refreshTokenCookie.setMaxAge(0);
 
 		response.addCookie(accessTokenCookie);
 		response.addCookie(refreshTokenCookie);
 
 		return "redirect:/";
+	}
+
+	@GetMapping("/setting")
+	public String setting(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+
+		if (userDetails != null) {
+			model.addAttribute("loginUser", userDetails.getUsername());
+			model.addAttribute("user", userService.findByUsername(userDetails.getUsername()));
+		}
+
+		return "pages/users/setting";
 	}
 }

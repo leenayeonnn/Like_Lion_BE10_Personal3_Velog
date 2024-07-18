@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-	private final CustomUserDetailsService customUserDetailsService;
 	private final JwtTokenizer jwtTokenizer;
 	private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 	private final RefreshTokenService refreshTokenService;
@@ -41,7 +41,10 @@ public class SecurityConfig {
 				.requestMatchers("/", "/welcome").permitAll()
 				.requestMatchers("/userreg", "/api/users/check-username", "/api/users/check-email").permitAll()
 				.requestMatchers("/login").permitAll()
-				.requestMatchers("/writepost", "/@{username}/{title}").permitAll()
+				.requestMatchers("/@{username}/**", "/api/posts/{username}", "/api/blogs", "/api/series/{username}").permitAll()
+				.requestMatchers(HttpMethod.GET,"/api/comments").permitAll()
+				.requestMatchers("/api/posts/{username}/series/{seriesId}").permitAll()
+				.requestMatchers("/posts/images/**", "/posts/main-images/**", "/users/profile-images/**").permitAll()
 				.anyRequest().authenticated()
 			)
 			.addFilterBefore(new JwtAuthenticationFilter(jwtTokenizer, refreshTokenService, userService),

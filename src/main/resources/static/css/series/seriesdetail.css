@@ -1,0 +1,16 @@
+#load-more-post-btn,
+#no-posts,
+.post {
+    width: 100%; /* 포스트 요소가 부모 컨테이너의 전체 너비를 차지하도록 설정 */
+    margin-top: 20px; /* 포스트 요소 사이에 여백을 추가 */
+    padding: 10px;
+}
+
+.post > * {
+    padding: 10px; /* 포스트 내부의 모든 직계 자식 요소에 패딩을 추가 */
+}
+
+.post-main-img img {
+    width: 100%; /* 이미지를 부모 요소의 너비에 맞게 설정 */
+    height: 500px; /* 이미지의 비율을 유지하면서 높이를 자동으로 설정 */
+}

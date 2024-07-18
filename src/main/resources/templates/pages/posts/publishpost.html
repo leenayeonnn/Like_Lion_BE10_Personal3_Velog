@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Publish Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link href="/css/styles.css" rel="stylesheet"/>
+    <link href="/css/posts/publishpost.css" rel="stylesheet"/>
+</head>
+<body>
+<nav th:replace="layouts/nav::nav(loginUser=${loginUser})"></nav>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h1>출간 설정</h1>
+        <form id="postForm" th:action="@{/post/publish}" method="post" th:object="${writePostDto}">
+
+            <input type="hidden" th:field="*{postId}">
+            <input type="hidden" th:field="*{blogId}">
+            <input type="hidden" th:field="*{title}">
+            <input type="hidden" th:field="*{content}">
+            <input type="hidden" th:field="*{isPublished}">
+            <input type="hidden" th:field="*{tagList}">
+            <input type="hidden" id="selectedSeries" th:field="*{series}">
+
+            <div class="field">
+                <label for="uploadMainImg">메인 이미지 설정</label>
+                <input type="file" id="uploadMainImg" th:value="이미지업로드"/>
+                <br/>
+                <div class="image-container">
+                    <img id="mainImgPreview" src="">
+                </div>
+                <input type="hidden" id="mainImgUrl" th:field="*{mainImgUrl}"/>
+            </div>
+            <div class="field">
+                <label for="publish">공개 여부</label>
+                <div id="publish">
+                    <input type="radio" id="publishTrue" th:field="*{isPublic}" th:value="true">
+                    <label for="publishTrue">공개</label>
+                    <input type="radio" id="publishFalse" th:field="*{isPublic}" th:value="false">
+                    <label for="publishFalse">비공개</label>
+                </div>
+                <small class="error-message" th:if="${#fields.hasErrors('isPublic')}"
+                       th:errors="*{isPublic}"></small>
+            </div>
+            <div class="field">
+                <label for="series">시리즈</label>
+                <br/>
+                <select id="series" class="form-select form-select-sm"></select>
+
+                <div id="addSeries">
+                    <label for="addSeriesInput">시리즈 추가하기</label>
+                    <input type="text" id="addSeriesInput">
+                    <button type="button" id="addSeriesBtn">추가하기</button>
+                </div>
+            </div>
+            <input type="submit" value="출간하기">
+        </form>
+    </div>
+</section>
+<footer th:replace="layouts/footer::footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/posts/publishpost.js"></script>
+</body>
+</html>

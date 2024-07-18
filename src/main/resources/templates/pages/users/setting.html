@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
     <title>Setting</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/users/setting.css">
 </head>
 <body>
-<h1>setting</h1>
+<nav th:replace="layouts/nav::nav(loginUser=${loginUser})"></nav>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h1>setting</h1>
+        <div id="main">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-profile"
+                            type="button" role="tab" aria-controls="nav-profile" aria-selected="true">프로필
+                    </button>
+                    <button class="nav-link" id="nav-withdrawal-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-withdrawal"
+                            type="button" role="tab" aria-controls="nav-withdrawal" aria-selected="false">회원탈퇴
+                    </button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
+                     aria-labelledby="nav-profile-tab" tabindex="0">
+                    <div id="username" class="field">
+                        <h4>ID</h4>
+                        <p><strong th:text="${user.username}"></strong></p>
+                    </div>
+                    <div id="password" class="field">
+                        <h4>PW</h4>
+                        <div class="right">
+                            <button id="password-btn">변경하기</button>
+                        </div>
+                    </div>
+                    <div id="profile-img" class="field">
+                        <h4>PROFILE IMG</h4>
+                        <div class="image-container">
+                            <img id="img-preview" th:src="${user.profileUrl}" alt="">
+                        </div>
+                        <div class="right">
+                            <button id="profile-btn">변경하기</button>
+                        </div>
+                    </div>
+                    <div id="name" class="field">
+                        <h4>NAME</h4>
+                        <p><strong id="current-name" th:text="${user.name}"></strong></p>
+                        <div class="right">
+                            <button id="name-btn">변경하기</button>
+                        </div>
+                    </div>
+                    <div id="email" class="field">
+                        <h4>EMAIL</h4>
+                        <p><strong id="current-email" th:text="${user.email}"></strong></p>
+                        <div class="right">
+                            <button id="email-btn">변경하기</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade center" id="nav-withdrawal" role="tabpanel"
+                     aria-labelledby="nav-withdrawal-tab" tabindex="0">
+                    <button id="withdrawal-btn" class="btn btn-outline-dark">탈퇴하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="layouts/footer::footer"></footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/users/setting.js"></script>
 </body>
 </html>

@@ -1,0 +1,23 @@
+.tab-pane * {
+    margin-top: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+}
+
+.field {
+    border-bottom: 1px solid lightgray;
+}
+
+.field * {
+    margin-bottom: 10px;
+}
+
+.right {
+    text-align: right;
+}

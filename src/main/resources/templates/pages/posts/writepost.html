@@ -8,28 +8,29 @@
     <title>Write Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
     <link href="/css/styles.css" rel="stylesheet"/>
-    <link href="/css/writepost.css" rel="stylesheet"/>
+    <link href="/css/posts/writepost.css" rel="stylesheet"/>
 </head>
 <body>
 <nav th:replace="layouts/nav::nav(loginUser=${loginUser})"></nav>
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <h1>새 게시글 작성</h1>
-        <form th:action="@{/writepost}" method="post" th:object="${post}">
+        <form id="postForm" th:action="@{/post/write}" method="post" th:object="${writePostDto}">
+
+            <input type="hidden" th:field="*{postId}">
+            <input type="hidden" th:field="*{blogId}">
+            <input type="hidden" th:field="*{mainImgUrl}">
+            <input type="hidden" th:field="*{isPublic}">
+            <input type="hidden" th:field="*{series}">
+
             <div class="field">
                 <label for="title">Title</label>
                 <input type="text" id="title" th:field="*{title}" placeholder="Title">
                 <small class="error-message" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>
             </div>
             <div class="field">
-                <label for="public">공개 여부</label>
-                <div id="public">
-                    <input type="radio" id="publicTrue" th:field="*{isPublic}" th:value="true">
-                    <label for="publicTrue">공개</label>
-                    <input type="radio" id="publicFalse" th:field="*{isPublic}" th:value="false">
-                    <label for="publicFalse">비공개</label>
-                </div>
-                <small class="error-message" th:if="${#fields.hasErrors('isPublic')}" th:errors="*{isPublic}"></small>
+                <label for="tagList">Tag</label>
+                <input type="text" id="tagList" th:field="*{tagList}" placeholder="공백으로 구분">
             </div>
             <div class="field">
                 <label for="publish">출간 여부</label>
@@ -39,20 +40,21 @@
                     <input type="radio" id="publishFalse" th:field="*{isPublished}" th:value="false">
                     <label for="publishFalse">임시글</label>
                 </div>
-                <small class="error-message" th:if="${#fields.hasErrors('isPublished')}" th:errors="*{isPublished}"></small>
+                <small class="error-message" th:if="${#fields.hasErrors('isPublished')}"
+                       th:errors="*{isPublished}"></small>
             </div>
 
             <label for="content">Content</label>
             <small class="error-message" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></small>
             <textarea id="content" th:field="*{content}" placeholder="Content"></textarea>
             <br/>
-            <input type="submit" id="saveButton" value="출간하기">
+            <input type="submit" value="제출하기">
         </form>
     </div>
 </section>
 <footer th:replace="layouts/footer::footer"></footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-<script src="/js/writepost.js"></script>
+<script src="/js/posts/writepost.js"></script>
 </body>
 </html>

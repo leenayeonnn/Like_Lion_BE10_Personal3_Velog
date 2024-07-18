@@ -1,13 +1,19 @@
-ul {
+#page-number ul {
     list-style: none;
     text-align: center; /* ul을 가로 중앙 정렬 */
     padding: 0;
 }
-li {
+#page-number li {
     display: inline;
     margin-right: 5px;
 }
 li a.active {
     font-weight: bold;
     text-decoration: underline;
+}
+
+.post-img-top {
+    aspect-ratio: 4.5 / 3;
+    object-fit: cover;
+    object-position: center;
 }

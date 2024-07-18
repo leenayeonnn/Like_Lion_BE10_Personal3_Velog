@@ -7,10 +7,16 @@ spring:
     username: skdus
     password: skdus1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 4MB
 
 jwt:
   secretKey: 12345678901234567890123456789012

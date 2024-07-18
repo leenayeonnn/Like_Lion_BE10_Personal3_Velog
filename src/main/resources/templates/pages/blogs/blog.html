@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Posts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/blogs/blog.css">
+</head>
+<body>
+<nav th:replace="layouts/nav::nav(loginUser=${loginUser})"></nav>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <input type="hidden" id="blog-username" th:value="${blogUsername}">
+        <input type="hidden" id="login-username" th:value="${loginUser}">
+        <div id="info">
+        </div>
+        <div id="main">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-post-tab" data-bs-toggle="tab" data-bs-target="#nav-post"
+                            type="button" role="tab" aria-controls="nav-post" aria-selected="true">게시글
+                    </button>
+                    <button class="nav-link" id="nav-series-tab" data-bs-toggle="tab" data-bs-target="#nav-series"
+                            type="button" role="tab" aria-controls="nav-series" aria-selected="false">시리즈
+                    </button>
+                    <button class="nav-link" id="nav-introduction -tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-introduction" type="button" role="tab" aria-controls="nav-introduction"
+                            aria-selected="false">소개
+                    </button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-post" role="tabpanel" aria-labelledby="nav-post-tab"
+                     tabindex="0">
+                </div>
+                <div class="tab-pane fade" id="nav-series" role="tabpanel" aria-labelledby="nav-series-tab"
+                     tabindex="0">
+                </div>
+                <div class="tab-pane fade" id="nav-introduction" role="tabpanel"
+                     aria-labelledby="nav-introduction-tab" tabindex="0">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="layouts/footer::footer"></footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="/js/blogs/blog.js"></script>
+</body>
+</html>
