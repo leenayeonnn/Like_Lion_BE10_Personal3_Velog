@@ -5,7 +5,7 @@ $('#withdrawal-btn').click(function () {
     const html = `
         <p>회원 탈퇴시 저장된 정보가 영구 삭제됨을 알림니다.</p>
         <p>탈퇴를 원하시면 계정 비밀번호를 입력해 주세요.</p>
-        <input id="password" type="password" name="password">
+        <input id="withdrawal-password" type="password" name="password">
         <button id="submit-withdrawal-btn">탈퇴하기</button>
     `
 
@@ -13,7 +13,7 @@ $('#withdrawal-btn').click(function () {
 });
 
 $(document).on('click', '#submit-withdrawal-btn', function () {
-    const password = $('#password').val();
+    const password = $('#withdrawal-password').val();
 
     $.ajax({
         url: "/api/users/withdrawal",

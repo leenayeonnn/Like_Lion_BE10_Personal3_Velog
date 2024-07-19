@@ -22,7 +22,7 @@ function loadPosts(orderMethod) {
             response.posts.forEach(function (post) {
                 const postDetailUrl = '/@' + post.blog.user.username + '/' + post.id;
                 const blogUrl = '/@' + post.blog.user.username;
-                const truncatedTitle = post.title > 15 ? post.title.substring(0, 15) + '...' : post.title;
+                const truncatedTitle = post.title.length > 15 ? post.title.substring(0, 15) + '...' : post.title;
                 const processedContent = $('<div>').html(post.content).text();
                 const truncatedContent = processedContent.length > 30 ? processedContent.substring(0, 30) + '...' : processedContent;
                 const writer = '작성자 : ' + post.blog.name;
