@@ -258,7 +258,7 @@ $(document).on('click', '.add-sub-comment-btn', function () {
 $(document).on('click', '.cancel-sub-comment-btn', function () {
     const commentElement = $(this).closest('.comment');
     commentElement.find('.add-sub-comment-btn').show();
-    commentElement.find('.sub-comment-input').remove();
+    commentElement.find('.sub-comment-form').remove();
 });
 
 $(document).on('click', '.submit-sub-comment-btn', function () {
